@@ -1,11 +1,11 @@
 
+import os
 import pandas as pd
 import numpy as np
-import os
 
 def read_data():
     # Define raw data path
-    raw_data_path = os.path.join(os.path.pardir, 'data', 'raw')
+    raw_data_path = os.path.join('data', 'raw')
     train_file_path = os.path.join(raw_data_path, 'train.csv')
     test_file_path = os.path.join(raw_data_path, 'test.csv')
     # read data from cvs file
@@ -36,7 +36,7 @@ def processed_data(df):
             .assign(IsMale = lambda x : np.where(x.Sex == 'male', 1, 0))
             .pipe(pd.get_dummies, columns=['Deck', 'Pclass', 'Title', 'AgeState', 'Fare_Bin', 'Embarked'])
             # Drop unnecessary column
-            .drop(['Cabin', 'Name', 'Ticket', 'Parch', 'SibSp', 'Sex'], axis=1, inplace=True)
+            .drop(['Cabin', 'Name', 'Ticket', 'Parch', 'SibSp', 'Sex'], axis=1)
             # Reorder column
             .pipe(reorder_columns)
            )
@@ -76,7 +76,7 @@ def fill_missing_values(df):
     # Embarked
     df.Embarked.fillna('C', inplace=True)
     # Fare
-    median_fare = combined_df.loc[
+    median_fare = df.loc[
         (df.Pclass == 3) & (df.Embarked == 'S'), 'Fare'].median()
     df.Fare.fillna(median_fare, inplace=True)
     # Age
@@ -95,7 +95,7 @@ def reorder_columns(df):
     return df
 
 def write_data_to_csv(df):
-    processed_data_path = os.path.join(os.path.pardir, 'data', 'processed')
+    processed_data_path = os.path.join('data', 'processed')
     write_train_file_path = os.path.join(processed_data_path, 'train.csv')
     write_test_file_path = os.path.join(processed_data_path, 'test.csv')
     # train data
@@ -103,8 +103,4 @@ def write_data_to_csv(df):
     # test data
     columns = [column for column in df.columns if column != 'Survived'] # exclude survived column
     df.loc[df.Survived == -1000, columns].to_csv(write_test_file_path)
-    
-if __name__ == '__main':
-    df = read_data()
-    df = processed_data(df)
-    write_data_to_csv(df)
+        

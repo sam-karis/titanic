@@ -3,6 +3,24 @@ Titanic
 
 Create a model to predict survival of individuals in the titanic ship
 
+
+To download the data .  
+- Create account at kaggle
+- To use kaggle api first install it `pip install kaggle`
+- To use this api sign in at [kaggle](https://www.kaggle.com) the go Account tab and slect **Create API Token** this will generate for you a file `kaggle.json` place it in the project root directory.
+- Run this command `kaggle competitions download  -c titanic -p data/raw/` or go to the notebook named `download_data` and run the cell to download the titanic datasets.   
+
+To view data exploration and processing go to `notebooks\explore_process_data`. Here one get basic understanding of the data structure of titanic dataset and very interesting properties about the data.   
+To automatically process and save the processed data that will be used for modelling run `python manage.py process`   
+To view defination and training of various model go to `notebooks\predictive_model`. Here I define the following:-
+- Baseline model  
+- Basic linear regression model
+- Optimize model parameters
+- Model Persistence   
+
+To automatically load saved model, make predictions and save them in a `csv` file run `python manage.py make_submit`
+
+
 Project Organization
 ------------
 
@@ -42,12 +60,9 @@ Project Organization
     │   │   └── build_features.py
     │   │
     │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
-    │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
+    │       │                 predictions
+    │       ├── predict_model.py
+    │       └── train_model.py
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
 
