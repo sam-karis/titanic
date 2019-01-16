@@ -8,7 +8,7 @@ To download the data .
 - Create account at kaggle
 - To use kaggle api first install it `pip install kaggle`
 - To use this api sign in at [kaggle](https://www.kaggle.com) the go Account tab and slect **Create API Token** this will generate for you a file `kaggle.json` place it in the project root directory.
-- Run this command `kaggle competitions download  -c titanic -p data/raw/` or go to the notebook named `download_data` and run the cell to download the titanic datasets.   
+- Run this command `make download` or go to the notebook named `download_data` and run the cell to download the titanic datasets.   
 
 To view data exploration and processing go to `notebooks\explore_process_data`. Here one get basic understanding of the data structure of titanic dataset and very interesting properties about the data.   
 To automatically process and save the processed data that will be used for modelling run `python manage.py process`   

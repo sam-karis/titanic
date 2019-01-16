@@ -11,7 +11,7 @@ def cli():
 @cli.command('download')
 def download_data():
     click.echo('To download the data run the command below:')
-    command = 'kaggle competitions download -c titanic -p data/raw/'
+    command = 'make download'
     click.echo('%s' %command)
 
 @cli.command('process')
